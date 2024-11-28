@@ -1,0 +1,18 @@
+graph TD
+    A[Main Function] -->|Starts| B[WorkflowOrchestrator]
+    B -->|Creates| C[MyWorkflow Instances]
+    B -->|Enqueues Messages| D[Message Queue]
+    B -->|Processes Messages| E[Process Messages]
+    E -->|Picks Up Message| F[Run Workflow]
+    F -->|Streams Events| G[ProgressEvent]
+    F -->|Returns Result| H[SecondEvent]
+    E -->|Completes Processing| I[Check Completion]
+    I -->|All Done| J[Finish Processing]
+    J -->|Returns Total Time| K[End of Main Function]
+
+    subgraph Workflow Processing
+        direction TB
+        E -->|Processes| F
+        F -->|Handles| G
+        F -->|Returns| H
+    end
